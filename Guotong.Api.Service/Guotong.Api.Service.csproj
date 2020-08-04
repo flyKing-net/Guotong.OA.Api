@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Guotong.Api.IRepository\Guotong.Api.IRepository.csproj" />
+    <ProjectReference Include="..\Guotong.Api.IService\Guotong.Api.IService.csproj" />
+    <ProjectReference Include="..\Guotong.Api.Repository\Guotong.Api.Repository.csproj" />
+  </ItemGroup>
+
+</Project>
