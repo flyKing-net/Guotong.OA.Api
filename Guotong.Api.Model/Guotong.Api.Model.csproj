@@ -12,7 +12,10 @@
 
   <ItemGroup>
     <Folder Include="ViewModel\" />
-    <Folder Include="Attributes\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.0.35" />
   </ItemGroup>
 
 </Project>

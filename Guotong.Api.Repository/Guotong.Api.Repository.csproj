@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.0.35" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Guotong.Api.IRepository\Guotong.Api.IRepository.csproj" />
     <ProjectReference Include="..\Guotong.Api.Model\Guotong.Api.Model.csproj" />
   </ItemGroup>
