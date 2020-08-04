@@ -103,16 +103,5 @@ namespace Guotong.Api.Controllers
             var user = JwtHelper.SerializeJwt(tokenHeader);
             return Ok(user);
         }
-
-        ///// <summary>
-        ///// 求和
-        ///// </summary>
-        ///// <param name="i"></param>
-        ///// <param name="j"></param>
-        ///// <returns></returns>
-        //[HttpGet]
-        //public IActionResult SumNumber(int i,int j) {
-        //    return Ok(_testService.Sum(i,j));
-        //}
     }
 }
