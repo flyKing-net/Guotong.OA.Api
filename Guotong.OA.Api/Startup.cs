@@ -16,6 +16,7 @@ using Guotong.Api.SetUp;
 using Guotong.Api.Common.Helper;
 using Guotong.Api.IService;
 using Guotong.Api.Service;
+using Guotong.Api.Repository.Dapper;
 
 namespace Guotong.OA.Api
 {
@@ -37,6 +38,8 @@ namespace Guotong.OA.Api
             //var text = AppSettings.app(new string[] {"AppSettings", "ConnectionString" });
             //Console.WriteLine($"ConnectionString:{text}");
             //Console.ReadLine();
+
+            BaseDBConfig.ConnectionString = Configuration.GetSection("AppSettings:ConnectionString").Value;
 
             //使用静态类封装注册Swagger
             services.AddSwaggerSetup();
