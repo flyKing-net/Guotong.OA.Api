@@ -90,6 +90,16 @@ namespace Guotong.Api.Controllers
             return Ok("hello AdminAndSystem");
         }
 
+        /// <summary>
+        /// 获取用户数量
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult GetUserCount() {
+            IUserService userService = new UserService();
+            return Ok(userService.GetCount());
+        }
+
 
         /// <summary>
         /// 解析Token
@@ -103,5 +113,8 @@ namespace Guotong.Api.Controllers
             var user = JwtHelper.SerializeJwt(tokenHeader);
             return Ok(user);
         }
+
+
+
     }
 }
