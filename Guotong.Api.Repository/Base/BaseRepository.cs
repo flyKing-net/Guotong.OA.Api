@@ -18,9 +18,9 @@ namespace Guotong.Api.Repository.Base
             return await ExecuteAsync(sql);
         }
 
-        public T Detail(string sql)
+        public T Detail(string sql, object param)
         {
-           return QueryFirstOrDefault<T>(sql);
+           return QueryFirstOrDefault<T>(sql, param);
         }
 
         public async Task<T> DetailAsync(string sql)

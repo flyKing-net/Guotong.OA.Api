@@ -9,6 +9,7 @@ namespace Guotong.Api.IRepository
 {
     public interface IUserRepository:IBaseRepository<User>
     {
-        Task<int> GetCount();
+        List<User> GetAllUserInfo();
+        User GetUser(string userName,string passWord);
     }
 }

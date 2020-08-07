@@ -16,7 +16,7 @@ namespace Guotong.Api.IRepository.Base
         /// </summary>
         /// <param name="sql"></param>
         /// <returns></returns>
-        T Detail(string sql);
+        T Detail(string sql, object param);
 
         /// <summary>
         /// 异步查询一条记录

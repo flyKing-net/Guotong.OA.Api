@@ -13,9 +13,16 @@ namespace Guotong.Api.Service
     public class UserService : BaseService<User>, IUserService
     {
         IUserRepository userDal = new UserRepository();
-        public async Task<int> GetCount()
+
+
+        public List<User> GetAllUserInfo()
         {
-           return await userDal.GetCount();
+            return userDal.GetAllUserInfo();
+        }
+
+        public User GetUser(string userName, string passWord)
+        {
+            return userDal.GetUser(userName,passWord);
         }
     }
 }

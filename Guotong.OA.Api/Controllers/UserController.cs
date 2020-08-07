@@ -10,7 +10,8 @@ using Guotong.Api.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Guotong.Api.Controllers
 {
@@ -24,38 +25,47 @@ namespace Guotong.Api.Controllers
         //public UserController(ITestService testService) {
         //    _testService = testService;
         //}
-       /// <summary>
-       /// 模拟登陆
-       /// </summary>
-       /// <param name="userName">用户名</param>
-       /// <param name="password">密码</param>
-       /// <param name="role">角色</param>
-       /// <returns></returns>
+
+        IUserService userService = new UserService();
+        /// <summary>
+        /// 用户登陆
+        /// </summary>
+        /// <param name="userName">用户名</param>
+        /// <param name="password">密码</param>
+        /// <param name="role">角色</param>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult Login(string userName,string password,string role)
         {
             string jwtStr = string.Empty;
             bool suc = false;
+            string msg = "";
             if (!string.IsNullOrWhiteSpace(userName)&&!string.IsNullOrWhiteSpace(password)&&role != null)
             {
-                if (userName.Equals("Acclink") && password.Equals("123456"))
+                var pwdMd5 = Md5(password); //md5加密
+                User user=userService.GetUser(userName,pwdMd5);
+                if (user!=null)
                 {
                     //将用户id和角色名，作为单独的自定义变量封装进token字符串
                     TokenModel tokenModel = new TokenModel { Uid = "admin", Role = role };
                     jwtStr = JwtHelper.IssueJwt(tokenModel); //登录，获取到一定规则的Token令牌
                     suc = true;
+                    msg = $"【{user.Name}】欢迎登录！！！";
                 }
                 else {
                     jwtStr = "login fail!!!";
+                    msg = "请检查用户名或密码是否正确";
                 }
             }
             else {
                 jwtStr = "login fail!!!";
+                msg = "请录入完整信息";
             }
 
             return Ok(new { 
             success=suc,
-            token=jwtStr
+            token=jwtStr,
+            msg=msg
             });
         }
 
@@ -91,13 +101,30 @@ namespace Guotong.Api.Controllers
         }
 
         /// <summary>
-        /// 获取用户数量
+        /// 获取所有用户信息
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public IActionResult GetUserCount() {
-            IUserService userService = new UserService();
-            return Ok(userService.GetCount());
+        [Authorize(Roles = "Admin")]
+        public IActionResult GetAllUserInfo() {
+            List<User> users = userService.GetAllUserInfo();
+            return Ok(users);
+        }
+
+        /// <summary>
+        /// md5 加密
+        /// </summary>
+        /// <param name="pwd"></param>
+        /// <returns></returns>
+        [ApiExplorerSettings(IgnoreApi = true)]
+        public string Md5(string pwd) {
+            using (var md5=MD5.Create())
+            {
+                var result = md5.ComputeHash(Encoding.UTF8.GetBytes(pwd));
+                var strResult = BitConverter.ToString(result);
+                string results = strResult.Replace("-","");
+                return results.ToLower();
+            }
         }
 
 

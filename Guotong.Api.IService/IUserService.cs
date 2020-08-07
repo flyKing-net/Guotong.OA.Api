@@ -9,7 +9,8 @@ namespace Guotong.Api.IService
 {
     public interface IUserService:IBaseService<User>
     {
-        Task<int> GetCount();
 
+        User GetUser(string userName, string passWord);
+        List<User> GetAllUserInfo();
     }
 }
