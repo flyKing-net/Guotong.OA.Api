@@ -20,13 +20,13 @@ namespace Guotong.Api.Controllers
     /// </summary>
     public class UserController:BaseController
     {
-        //private readonly ITestService _testService;
+      
+        private readonly IUserService _userService;
 
-        //public UserController(ITestService testService) {
-        //    _testService = testService;
-        //}
+        public UserController(IUserService userService) {
+            _userService = userService;
+        }
 
-        IUserService userService = new UserService();
         /// <summary>
         /// 用户登陆
         /// </summary>
@@ -43,7 +43,7 @@ namespace Guotong.Api.Controllers
             if (!string.IsNullOrWhiteSpace(userName)&&!string.IsNullOrWhiteSpace(password)&&role != null)
             {
                 var pwdMd5 = Md5(password); //md5加密
-                User user=userService.GetUser(userName,pwdMd5);
+                User user=_userService.GetUser(userName,pwdMd5);
                 if (user!=null)
                 {
                     //将用户id和角色名，作为单独的自定义变量封装进token字符串
@@ -107,7 +107,7 @@ namespace Guotong.Api.Controllers
         [HttpGet]
         [Authorize(Roles = "Admin")]
         public IActionResult GetAllUserInfo() {
-            List<User> users = userService.GetAllUserInfo();
+            List<User> users = _userService.GetAllUserInfo();
             return Ok(users);
         }
 

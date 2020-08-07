@@ -12,7 +12,10 @@ namespace Guotong.Api.Service
 {
     public class UserService : BaseService<User>, IUserService
     {
-        IUserRepository userDal = new UserRepository();
+        private readonly IUserRepository userDal;
+        public UserService(IUserRepository userRepository) {
+            userDal = userRepository;
+        }
 
 
         public List<User> GetAllUserInfo()

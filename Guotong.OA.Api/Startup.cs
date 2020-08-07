@@ -17,6 +17,7 @@ using Guotong.Api.Common.Helper;
 using Guotong.Api.IService;
 using Guotong.Api.Service;
 using Guotong.Api.Repository.Dapper;
+using Autofac;
 
 namespace Guotong.OA.Api
 {
@@ -49,6 +50,10 @@ namespace Guotong.OA.Api
 
             services.AddControllers();
 
+        }
+
+        public void ConfigureContainer(ContainerBuilder builder) {
+            builder.RegisterModule(new AutofacModuleRegister()); //×¢²áAutofacModuleRegister
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
