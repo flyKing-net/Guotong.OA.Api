@@ -11,5 +11,6 @@ namespace Guotong.Api.IRepository
     {
         List<User> GetAllUserInfo();
         User GetUser(string userName,string passWord);
+        Task<User> GetById(int id);
     }
 }

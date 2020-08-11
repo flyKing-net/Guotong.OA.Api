@@ -28,5 +28,14 @@ namespace Guotong.Api.Repository
             string sql = "select * from [User]";
             return Select(sql);
         }
+
+        public async Task<User> GetById(int id)
+        {
+            string sql = "select * from [User] where Id=@Id";
+            DynamicParameters parameters = new DynamicParameters();
+            parameters.Add("@Id",id);
+            return await DetailAsync(sql,parameters);
+        }
+
     }
 }

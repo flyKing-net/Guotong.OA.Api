@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Cryptography;
 using System.Text;
+using Guotong.Api.Common.Redis;
+using Guotong.Api.Model.ViewModel;
 
 namespace Guotong.Api.Controllers
 {
@@ -20,11 +22,13 @@ namespace Guotong.Api.Controllers
     /// </summary>
     public class UserController:BaseController
     {
-      
         private readonly IUserService _userService;
+        private readonly IRedisCacheManager _redisCacheManager;
 
-        public UserController(IUserService userService) {
+        public UserController(IUserService userService,IRedisCacheManager redisCacheManager)
+        {
             _userService = userService;
+            _redisCacheManager = redisCacheManager;
         }
 
         /// <summary>
@@ -109,6 +113,38 @@ namespace Guotong.Api.Controllers
         public IActionResult GetAllUserInfo() {
             List<User> users = _userService.GetAllUserInfo();
             return Ok(users);
+        }
+
+        /// <summary>
+        /// 缓存当前查询的用户信息
+        /// </summary>
+        /// <param name="id">用户编号</param>
+        /// <returns></returns>
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> GetAllUserByRedis(int id) {
+            var key = $"Redis{id}";
+            User user = new User();
+            if (_redisCacheManager.Get<object>(key) != null)
+            {
+                user = _redisCacheManager.Get<User>(key);
+            }
+            else {
+                user =await _userService.GetById(id);
+                _redisCacheManager.Set(key,user,TimeSpan.FromHours(2)); //设置缓存，缓存2小时
+            }
+            return Ok(user);
+        }
+
+        /// <summary>
+        /// 得到用户详细信息
+        /// </summary>
+        /// <param name="id">编号</param>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<IActionResult> GetUserDetails(int id) {
+            UserViewModel userViewModel = await _userService.GetUserDetails(id);
+            return Ok(userViewModel);
         }
 
         /// <summary>

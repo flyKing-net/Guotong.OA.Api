@@ -21,7 +21,7 @@ namespace Guotong.Api.SetUp
 
             //注册Repository
             var assemblysRepository = Assembly.Load("Guotong.Api.Repository");
-            builder.RegisterAssemblyTypes(assemblysServices)
+            builder.RegisterAssemblyTypes(assemblysRepository)
                 .InstancePerDependency() //瞬时单例
                 .AsImplementedInterfaces() //自动以其实现的所有接口类型暴露
                 .EnableInterfaceInterceptors(); //引用Autofac.Extras.DynamicProxy

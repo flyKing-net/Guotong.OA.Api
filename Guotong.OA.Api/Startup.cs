@@ -18,6 +18,8 @@ using Guotong.Api.IService;
 using Guotong.Api.Service;
 using Guotong.Api.Repository.Dapper;
 using Autofac;
+using Guotong.Api.Common.Redis;
+using AutoMapper;
 
 namespace Guotong.OA.Api
 {
@@ -50,6 +52,11 @@ namespace Guotong.OA.Api
 
             services.AddControllers();
 
+            //×¢²áredis
+            services.AddSingleton<IRedisCacheManager, RedisCacheManager>();
+
+            //×¢ÈëÓ³Éä
+            services.AddAutoMapper(typeof(Startup));
         }
 
         public void ConfigureContainer(ContainerBuilder builder) {

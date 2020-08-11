@@ -1,10 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
+using Dapper;
 
 namespace Guotong.Api.Model.Entity
 {
-    public class User
+    /// <summary>
+    /// 用户表
+    /// </summary>
+    [Table("User")]
+    public partial class User
     {
         /// <summary>
         /// 单位编号

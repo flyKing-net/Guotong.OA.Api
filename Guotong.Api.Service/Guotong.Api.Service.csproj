@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.0.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Guotong.Api.IRepository\Guotong.Api.IRepository.csproj" />
     <ProjectReference Include="..\Guotong.Api.IService\Guotong.Api.IService.csproj" />
     <ProjectReference Include="..\Guotong.Api.Repository\Guotong.Api.Repository.csproj" />

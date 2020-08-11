@@ -10,7 +10,12 @@ namespace Guotong.Api.Service.Base
 {
     public class BaseService<T> : IBaseService<T> where T : class, new()
     {
-        public IBaseRepository<T> baseDal = new BaseRepository<T>();
+        private readonly IBaseRepository<T> baseDal;
+
+        public BaseService(IBaseRepository<T> baseRepository)
+        {
+            baseDal = baseRepository;
+        }
 
         public async Task<bool> Add(string sql)
         {
@@ -22,9 +27,9 @@ namespace Guotong.Api.Service.Base
             return await baseDal.Delete(sql)>0;
         }
 
-        public async Task<T> Query(string sql)
+        public async Task<T> Query(string sql,object param)
         {
-           return await baseDal.DetailAsync(sql);
+           return await baseDal.DetailAsync(sql, param);
         }
 
         public async Task<bool> Update(string sql)

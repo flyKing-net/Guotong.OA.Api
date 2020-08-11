@@ -12,7 +12,7 @@ namespace Guotong.Api.IService.Base
         /// </summary>
         /// <param name="objId"></param>
         /// <returns></returns>
-        Task<T> Query(string sql);
+        Task<T> Query(string sql,object param);
 
         /// <summary>
         /// 添加实体

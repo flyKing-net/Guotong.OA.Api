@@ -23,7 +23,7 @@ namespace Guotong.Api.IRepository.Base
         /// </summary>
         /// <param name="sql"></param>
         /// <returns></returns>
-        Task<T> DetailAsync(string sql);
+        Task<T> DetailAsync(string sql, object param);
 
         /// <summary>
         /// 查询多条记录
