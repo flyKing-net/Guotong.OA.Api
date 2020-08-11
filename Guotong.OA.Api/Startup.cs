@@ -20,6 +20,11 @@ using Guotong.Api.Repository.Dapper;
 using Autofac;
 using Guotong.Api.Common.Redis;
 using AutoMapper;
+using log4net.Repository;
+using Guotong.Api.Log;
+using log4net;
+using log4net.Config;
+using Guotong.Api.Filter;
 
 namespace Guotong.OA.Api
 {
@@ -32,6 +37,10 @@ namespace Guotong.OA.Api
 
         public IConfiguration Configuration { get; }
 
+        /// <summary>
+        /// log4net 仓储
+        /// </summary>
+        public static ILoggerRepository repository { get; set; }
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -57,6 +66,17 @@ namespace Guotong.OA.Api
 
             //注入映射
             services.AddAutoMapper(typeof(Startup));
+
+            //log注入ILoggerHelper
+            services.AddSingleton<ILoggerHelper, LoggerHelper>();
+
+            repository = LogManager.CreateRepository("");//需要获取日志的仓库名
+            XmlConfigurator.Configure(repository,new FileInfo("Log4net.config"));//指定配置文件
+
+            //注入全局异常
+            services.AddControllers(option => {
+                option.Filters.Add(typeof(GlobalExceptionFilter));
+            });
         }
 
         public void ConfigureContainer(ContainerBuilder builder) {
