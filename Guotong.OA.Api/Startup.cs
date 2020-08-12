@@ -25,6 +25,8 @@ using Guotong.Api.Log;
 using log4net;
 using log4net.Config;
 using Guotong.Api.Filter;
+using Guotong.Api.Middleware;
+using Guotong.Api.JsonConv;
 
 namespace Guotong.OA.Api
 {
@@ -76,6 +78,14 @@ namespace Guotong.OA.Api
             //注入全局异常
             services.AddControllers(option => {
                 option.Filters.Add(typeof(GlobalExceptionFilter));
+            }).AddJsonOptions(option=> {
+                //空的字段不返回
+                option.JsonSerializerOptions.IgnoreNullValues = true;
+                //返回json小写
+                option.JsonSerializerOptions.PropertyNamingPolicy = new LowercasePolicy();
+                //时间格式格式化
+                option.JsonSerializerOptions.Converters.Add(new DateTimeConverter());
+                option.JsonSerializerOptions.Converters.Add(new DateTimeNullableConverter());
             });
         }
 
@@ -96,6 +106,8 @@ namespace Guotong.OA.Api
             app.UseAuthentication();
 
             app.UseAuthorization();
+
+            app.UseCustomExceptionMiddleware();
 
             app.UseEndpoints(endpoints =>
             {

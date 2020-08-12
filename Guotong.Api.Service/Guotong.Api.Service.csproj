@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Guotong.Api.Common\Guotong.Api.Common.csproj" />
     <ProjectReference Include="..\Guotong.Api.IRepository\Guotong.Api.IRepository.csproj" />
     <ProjectReference Include="..\Guotong.Api.IService\Guotong.Api.IService.csproj" />
     <ProjectReference Include="..\Guotong.Api.Repository\Guotong.Api.Repository.csproj" />

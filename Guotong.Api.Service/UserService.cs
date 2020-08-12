@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Guotong.Api.Common.Attributes;
 using Guotong.Api.IRepository;
 using Guotong.Api.IRepository.Base;
 using Guotong.Api.IService;
@@ -37,6 +38,7 @@ namespace Guotong.Api.Service
             return userDal.GetUser(userName,passWord);
         }
 
+        [Caching(AbsoluteExpiration =1)]
         public async Task<UserViewModel> GetUserDetails(int id)
         {
             var userinfo = await userDal.GetById(id);
