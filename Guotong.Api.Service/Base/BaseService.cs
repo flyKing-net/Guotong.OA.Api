@@ -17,14 +17,14 @@ namespace Guotong.Api.Service.Base
             baseDal = baseRepository;
         }
 
-        public async Task<bool> Add(string sql)
+        public async Task<bool> Add(string sql, object param)
         {
-           return await baseDal.Insert(sql)>0;
+           return await baseDal.Insert(sql, param) >0;
         }
 
-        public async Task<bool> DeleteByIds(string sql)
+        public async Task<bool> DeleteByIds(string sql, object param)
         {
-            return await baseDal.Delete(sql)>0;
+            return await baseDal.Delete(sql, param) >0;
         }
 
         public async Task<T> Query(string sql,object param)
@@ -32,9 +32,9 @@ namespace Guotong.Api.Service.Base
            return await baseDal.DetailAsync(sql, param);
         }
 
-        public async Task<bool> Update(string sql)
+        public async Task<bool> Update(string sql, object param)
         {
-            return await baseDal.Update(sql)>0;
+            return await baseDal.Update(sql, param) >0;
         }
     }
 }

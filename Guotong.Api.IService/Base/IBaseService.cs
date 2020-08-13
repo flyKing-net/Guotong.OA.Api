@@ -19,20 +19,20 @@ namespace Guotong.Api.IService.Base
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        Task<bool> Add(string sql);
+        Task<bool> Add(string sql, object param);
 
         /// <summary>
         /// 更新实体
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        Task<bool> Update(string sql);
+        Task<bool> Update(string sql, object param);
 
         /// <summary>
         /// 根据ID列表删除
         /// </summary>
         /// <param name="ids"></param>
         /// <returns></returns>
-        Task<bool> DeleteByIds(string sql);
+        Task<bool> DeleteByIds(string sql, object param);
     }
 }

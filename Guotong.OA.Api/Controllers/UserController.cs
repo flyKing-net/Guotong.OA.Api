@@ -79,6 +79,7 @@ namespace Guotong.Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [Authorize(Roles ="Admin")]
+        [ApiExplorerSettings(IgnoreApi = true)]
         public IActionResult Admin() {
             return Ok("hello Admin");
         }
@@ -90,6 +91,7 @@ namespace Guotong.Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [Authorize(Roles ="System")]
+        [ApiExplorerSettings(IgnoreApi = true)]
         public IActionResult System() {
             return Ok("hello System");
         }
@@ -100,6 +102,7 @@ namespace Guotong.Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [Authorize(Policy ="SystemOrAdmin")]
+        [ApiExplorerSettings(IgnoreApi = true)]
         public IActionResult AdminAndSystem() {
             return Ok("hello AdminAndSystem");
         }
@@ -110,6 +113,7 @@ namespace Guotong.Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [Authorize(Roles = "Admin")]
+        [ApiExplorerSettings(IgnoreApi = true)]
         public IActionResult GetAllUserInfo() {
             List<User> users = _userService.GetAllUserInfo();
             return Ok(users);
@@ -122,6 +126,7 @@ namespace Guotong.Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [Authorize(Roles = "Admin")]
+        [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> GetAllUserByRedis(int id) {
             var key = $"Redis{id}";
             User user = new User();
@@ -142,6 +147,8 @@ namespace Guotong.Api.Controllers
         /// <param name="id">编号</param>
         /// <returns></returns>
         [HttpGet]
+        [Authorize(Roles ="Admin")]
+        [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> GetUserDetails(int id) {
             UserViewModel userViewModel = await _userService.GetUserDetails(id);
             return Ok(userViewModel);
@@ -169,7 +176,7 @@ namespace Guotong.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles ="Admin")]
         public IActionResult ParseToken() {
             //截取Bearer
             var tokenHeader = HttpContext.Request.Headers["Authorization"].ToString().Replace("Bearer", "").TrimStart();

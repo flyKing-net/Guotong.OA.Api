@@ -13,9 +13,9 @@ namespace Guotong.Api.Repository.Base
     /// </summary>
     public class BaseRepository<T> : DbContext, IBaseRepository<T> where T : class, new()
     {
-        public async Task<int> Delete(string sql)
+        public async Task<int> Delete(string sql, object param)
         {
-            return await ExecuteAsync(sql);
+            return await ExecuteAsync(sql,param);
         }
 
         public T Detail(string sql, object param)
@@ -28,14 +28,14 @@ namespace Guotong.Api.Repository.Base
             return await QueryFirstOrDefaultAsync<T>(sql,param);
         }
 
-        public async Task<int> Insert(string sql)
+        public async Task<int> Insert(string sql, object param)
         {
-            return await ExecuteAsync(sql);
+            return await ExecuteAsync(sql, param);
         }
 
-        public List<T> Select(string sql)
+        public List<T> Select(string sql,object param)
         {
-            return Query<T>(sql).ToList();
+            return Query<T>(sql,param).ToList();
         }
 
         public async Task<List<T>> SelectAsync(string sql)
@@ -43,9 +43,9 @@ namespace Guotong.Api.Repository.Base
             return (List<T>)await QueryAsync<T>(sql);
         }
 
-        public async Task<int> Update(string sql)
+        public async Task<int> Update(string sql, object param)
         {
-            return await ExecuteAsync(sql);
+            return await ExecuteAsync(sql, param);
         }
     }
 }

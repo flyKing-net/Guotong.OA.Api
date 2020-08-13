@@ -30,7 +30,7 @@ namespace Guotong.Api.IRepository.Base
         /// </summary>
         /// <param name="sql"></param>
         /// <returns></returns>
-        List<T> Select(string sql);
+        List<T> Select(string sql,object param);
 
         /// <summary>
         /// 异步查询多条记录
@@ -39,11 +39,11 @@ namespace Guotong.Api.IRepository.Base
         /// <returns></returns>
         Task<List<T>> SelectAsync(string sql);
 
-        Task<int> Insert(string sql);
+        Task<int> Insert(string sql, object param);
 
-        Task<int> Update(string sql);
+        Task<int> Update(string sql, object param);
 
-        Task<int> Delete(string sql);
+        Task<int> Delete(string sql, object param);
 
     }
 }

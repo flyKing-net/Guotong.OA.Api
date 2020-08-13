@@ -26,7 +26,7 @@ namespace Guotong.Api.Repository
         public List<User> GetAllUserInfo()
         {
             string sql = "select * from [User]";
-            return Select(sql);
+            return Select(sql,null);
         }
 
         public async Task<User> GetById(int id)

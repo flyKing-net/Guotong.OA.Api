@@ -18,6 +18,7 @@ namespace Guotong.Api.AutoMapper
         /// </summary>
         public CustomProfile() {
             CreateMap<User, UserViewModel>();
+            CreateMap<VideoLearnCenter, VideoCenterViewModel>();
         }
     }
 }
