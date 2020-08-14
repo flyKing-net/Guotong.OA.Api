@@ -177,6 +177,7 @@ namespace Guotong.Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [Authorize(Roles ="Admin")]
+        [ApiExplorerSettings(IgnoreApi =true)]
         public IActionResult ParseToken() {
             //截取Bearer
             var tokenHeader = HttpContext.Request.Headers["Authorization"].ToString().Replace("Bearer", "").TrimStart();
