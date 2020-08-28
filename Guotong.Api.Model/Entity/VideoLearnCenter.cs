@@ -53,5 +53,7 @@ namespace Guotong.Api.Model.Entity
         /// 是否必须观看 0 否 1 是
         /// </summary>
         public int MustWatch { get; set; }
+
+        public VideoLearnRecord VideoLearnRecord { get; set; }
     }
 }

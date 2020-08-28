@@ -18,8 +18,10 @@ namespace Guotong.Api.Controllers
     public class VideoLearnController : BaseController
     {
         private readonly IVideoCenterService _videoCenterService;
-        public VideoLearnController(IVideoCenterService videoCenterService) {
+        private readonly IVideoRecordService _videoRecordService;
+        public VideoLearnController(IVideoCenterService videoCenterService,IVideoRecordService videoRecordService) {
             _videoCenterService = videoCenterService;
+            _videoRecordService = videoRecordService;
         }
 
        /// <summary>
@@ -93,14 +95,31 @@ namespace Guotong.Api.Controllers
             return Ok(deleteState);
         }
 
-        /// <summary>
-        /// 添加观看记录信息
-        /// </summary>
-        /// <returns></returns>
+       /// <summary>
+       /// 添加观看记录信息
+       /// </summary>
+       /// <param name="videoId">视频编号</param>
+       /// <param name="cid">单位编号</param>
+       /// <param name="userId">用户编号</param>
+       /// <param name="watchLongTime">观看时长</param>
+       /// <param name="watchState">观看状态</param>
+       /// <param name="videoImage">观看图片</param>
+       /// <returns></returns>
         [HttpPost]
         [Authorize(Roles = "Admin")]
-        public IActionResult AddVideoRecord() {
-            return Ok();
+        public async Task<IActionResult> AddVideoRecord(int videoId,int cid,int userId,int watchLongTime,int watchState,string videoImage) {
+            bool addState = await _videoRecordService.AddRecord(new VideoLearnRecord
+            {
+                VideoId = videoId,
+                Cid = cid,
+                UserId = userId,
+                WatchLongTime = watchLongTime,
+                WatchState = watchState,
+                VideoImage=videoImage,
+                StartWatchTime=DateTime.Now,
+                FinishWatchTime=DateTime.Now
+            }) ;
+            return Ok(addState);
         }
     }
 }

@@ -18,17 +18,9 @@ namespace Guotong.Api.Repository
         /// <returns></returns>
         public async Task<int> AddVideo(VideoLearnCenter videoLearnCenter)
         {
-            string sql = "insert VideoLearnCenter values(@VideoTitle,@VideoName,@VideoDescribe,@UploadCid,@UploadUserId,@UploadTime,@VideoLimit,@MustWatch)";
-            DynamicParameters parameters = new DynamicParameters();
-            parameters.Add("VideoTitle",videoLearnCenter.VideoTitle);
-            parameters.Add("VideoName", videoLearnCenter.VideoName);
-            parameters.Add("VideoDescribe", videoLearnCenter.VideoDescribe);
-            parameters.Add("UploadCid", videoLearnCenter.UploadCid);
-            parameters.Add("UploadUserId", videoLearnCenter.UploadUserId);
-            parameters.Add("UploadTime", DateTime.Now);
-            parameters.Add("VideoLimit", videoLearnCenter.VideoLimit);
-            parameters.Add("MustWatch",videoLearnCenter.MustWatch);
-            return await Insert(sql,parameters);
+            string sql = @"insert into VideoLearnCenter(VideoTitle,VideoName,VideoDescribe,UploadCid,UploadUserId,UploadTime,VideoLimit,MustWatch) 
+                         values(@VideoTitle,@VideoName,@VideoDescribe,@UploadCid,@UploadUserId,@UploadTime,@VideoLimit,@MustWatch)";
+            return await Insert(sql,videoLearnCenter);
         }
 
         /// <summary>
@@ -39,11 +31,10 @@ namespace Guotong.Api.Repository
         /// <returns></returns>
         public List<VideoLearnCenter> GetVideoLearnCenterList(int startPage, int endPage)
         {
-            string sql = "select * from (select ROW_NUMBER() over(order by Id desc) rowNumbers ,* from VideoLearnCenter) a where rowNumbers>=@start_page and rowNumbers<=@end_page";
-            DynamicParameters parameters = new DynamicParameters();
-            parameters.Add("start_page", startPage);
-            parameters.Add("end_page", endPage);
-            return Select(sql,parameters);
+            string sql = @"select rowNumbers ,Id,VideoTitle,VideoName,VideoDescribe,UploadCid,UploadUserId,UploadTime,VideoLimit,MustWatch from (
+                           select ROW_NUMBER() over(order by Id desc) rowNumbers ,Id,VideoTitle,VideoName,VideoDescribe,UploadCid,UploadUserId,UploadTime,VideoLimit,MustWatch from VideoLearnCenter
+                           ) a where rowNumbers>=@startPage and rowNumbers<=@endPage";
+            return Select(sql, new {startPage=startPage,endPage=endPage });
         }
 
         /// <summary>
@@ -54,12 +45,7 @@ namespace Guotong.Api.Repository
         public async Task<int> UpdateVideo(VideoLearnCenter videoLearnCenter)
         {
             string sql = "Update VideoLearnCenter set VideoTitle=@VideoTitle,VideoName=@VideoName,VideoDescribe=@VideoDescribe where Id=@Id";
-            DynamicParameters parameters = new DynamicParameters();
-            parameters.Add("VideoTitle", videoLearnCenter.VideoTitle);
-            parameters.Add("VideoName", videoLearnCenter.VideoName);
-            parameters.Add("VideoDescribe", videoLearnCenter.VideoDescribe);
-            parameters.Add("Id", videoLearnCenter.Id);
-            return await Update(sql, parameters);
+            return await Update(sql, videoLearnCenter);
         }
 
         /// <summary>
@@ -70,9 +56,7 @@ namespace Guotong.Api.Repository
         public async Task<int> DeleteVideo(int id)
         {
             string sql = "delete VideoLearnCenter where Id=@id";
-            DynamicParameters parameters = new DynamicParameters();
-            parameters.Add("id",id);
-            return await Delete(sql,parameters);
+            return await Delete(sql,new { id=id});
         }
     }
 }

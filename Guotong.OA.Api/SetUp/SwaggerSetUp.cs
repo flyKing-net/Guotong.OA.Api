@@ -29,10 +29,8 @@ namespace Guotong.Api.SetUp
                 var xmlPath = Path.Combine(basePath, xmlFile); // 获取xml注释文件的目录
                 c.IncludeXmlComments(xmlPath, true); //注册
 
-                //var xmlModelPath = Path.Combine(AppContext.BaseDirectory, "Webapi.Core.Model.xml");//这个就是Model层的xml文件名
-                //c.IncludeXmlComments(xmlModelPath);
                 var xmlModelPath = Path.Combine(basePath, "Guotong.Api.Model.xml"); //Model层的文件名
-                c.IncludeXmlComments(xmlModelPath, true);
+                c.IncludeXmlComments(xmlModelPath);
 
                 //在header 中添加token，传递到后台
                 c.OperationFilter<SecurityRequirementsOperationFilter>();

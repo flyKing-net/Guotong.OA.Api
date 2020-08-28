@@ -1,10 +1,6 @@
 ﻿using AutoMapper;
 using Guotong.Api.Model.Entity;
 using Guotong.Api.Model.ViewModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Guotong.Api.AutoMapper
 {

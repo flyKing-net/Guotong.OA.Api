@@ -2,7 +2,6 @@
 using Guotong.Api.Common.Attributes;
 using Guotong.Api.Common.Redis;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 

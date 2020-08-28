@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Guotong.Api.Auth;
 using Guotong.Api.IService;
 using Guotong.Api.Model;
 using Guotong.Api.Model.Entity;
-using Guotong.Api.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
