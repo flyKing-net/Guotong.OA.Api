@@ -26,6 +26,7 @@ namespace Guotong.Api.Filter
         public void OnException(ExceptionContext context)
         {
             var json = new JsonErrorResponse();
+            json.Status = StatusCodes.Status500InternalServerError;
             json.Message = context.Exception.Message; //错误信息
             if (_env.IsDevelopment())
             {
@@ -48,6 +49,9 @@ namespace Guotong.Api.Filter
         /// </summary>
         public class JsonErrorResponse
         {
+            public int Status { get; set; }
+
+            public bool Success { get; set; } = false;
             /// <summary>
             /// 生产环境的消息
             /// </summary>

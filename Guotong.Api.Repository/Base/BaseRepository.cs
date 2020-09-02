@@ -38,6 +38,10 @@ namespace Guotong.Api.Repository.Base
             return Query<T>(sql,param).ToList();
         }
 
+        public List<T> Select<T1, T2>(string sql,object param, Func<T1, T2, T> map,string splitOn) {
+            return Query<T1, T2, T>(sql,map,param, splitOn);
+        }
+
         public async Task<List<T>> SelectAsync(string sql)
         {
             return (List<T>)await QueryAsync<T>(sql);

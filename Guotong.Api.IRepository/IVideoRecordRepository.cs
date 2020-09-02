@@ -9,6 +9,8 @@ namespace Guotong.Api.IRepository
 {
     public interface IVideoRecordRepository:IBaseRepository<VideoLearnRecord>
     {
+        VideoLearnRecord GetRecord(int videoId,int cid,int userid);
         Task<int> AddRecord(VideoLearnRecord videoLearnRecord);
+        Task<int> UpdateRecord(VideoLearnRecord videoLearnRecord);
     }
 }

@@ -29,9 +29,9 @@ namespace Guotong.Api.Service
         }
 
 
-        public List<VideoCenterViewModel> GetVideoLearnCenterList(int startPage, int endPage)
+        public List<VideoCenterViewModel> GetVideoLearnCenterList(int startPage, int endPage, int cid, int userid)
         {
-            List<VideoLearnCenter> videoList=_videoCenterDal.GetVideoLearnCenterList(startPage, endPage);
+            List<VideoLearnCenter> videoList=_videoCenterDal.GetVideoLearnCenterList(startPage, endPage,cid,userid);
             List<VideoCenterViewModel> viewModels = iMapper.Map<List<VideoCenterViewModel>>(videoList);
             return viewModels;
         }

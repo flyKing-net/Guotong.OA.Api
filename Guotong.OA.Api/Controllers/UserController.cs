@@ -37,6 +37,7 @@ namespace Guotong.Api.Controllers
         /// <param name="role">角色</param>
         /// <returns></returns>
         [HttpGet]
+        [ApiExplorerSettings(IgnoreApi =true)]
         public IActionResult Login(string userName,string password,string role)
         {
             string jwtStr = string.Empty;
@@ -68,6 +69,24 @@ namespace Guotong.Api.Controllers
             success=suc,
             token=jwtStr,
             msg=msg
+            });
+        }
+
+
+        /// <summary>
+        /// 获取tokens
+        /// </summary>
+        /// <param name="role">角色</param>
+        /// <returns></returns>
+        [HttpGet("{role}")]
+        public IActionResult GetTokens(string role) {
+            string jwtStr =string.Empty;
+            TokenModel tokenModel = new TokenModel { Uid="admin",Role=role};
+            jwtStr = JwtHelper.IssueJwt(tokenModel); //登录，获取到一定规则的Token令牌
+            return Ok(new { 
+            success=true,
+            token=jwtStr,
+            msg="请求成功"
             });
         }
 

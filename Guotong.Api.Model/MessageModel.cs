@@ -12,7 +12,7 @@ namespace Guotong.Api.Model
         /// <summary>
         /// 状态码
         /// </summary>
-        public int status { get; set; } = 200;
+        public int status { get; set; } = 500;
 
         /// <summary>
         /// 操作是否成功

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -55,6 +56,25 @@ namespace Guotong.Api.Repository.Dapper
         /// <returns></returns>
         public IEnumerable<T> Query<T>(string sql,object param=null,IDbTransaction transaction=null,bool buffered=true,int? commandTimeout=null,CommandType? commandType=null) {
             return Db.Query<T>(sql,param,transaction,buffered,commandTimeout,commandType);
+        }
+
+
+        /// <summary>
+        /// 多表连接查询
+        /// </summary>
+        /// <typeparam name="T1"></typeparam>
+        /// <typeparam name="T2"></typeparam>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="sql"></param>
+        /// <param name="map"></param>
+        /// <param name="param"></param>
+        /// <param name="transaction"></param>
+        /// <param name="buffered"></param>
+        /// <param name="splitOn"></param>
+        /// <param name="commandTimeout"></param>
+        /// <returns></returns>
+        public List<T> Query<T1, T2,T>(string sql, Func<T1,T2,T> map,object param = null, string splitOn = "", IDbTransaction transaction = null, bool buffered = true,int? commandTimeout = null) {
+            return Db.Query<T1, T2, T>(sql, map, param, transaction, buffered, splitOn, commandTimeout).ToList();
         }
 
         /// <summary>

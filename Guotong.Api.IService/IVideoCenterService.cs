@@ -15,8 +15,10 @@ namespace Guotong.Api.IService
         /// </summary>
         /// <param name="startPage">开始页</param>
         /// <param name="endPage">结束页</param>
+        /// <param name="cid">单位编号</param>
+        /// <param name="userid">人员编号</param>
         /// <returns></returns>
-        List<VideoCenterViewModel> GetVideoLearnCenterList(int startPage, int endPage);
+        List<VideoCenterViewModel> GetVideoLearnCenterList(int startPage, int endPage, int cid, int userid);
 
         /// <summary>
         /// 添加视频信息

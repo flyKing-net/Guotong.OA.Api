@@ -10,7 +10,7 @@ namespace Guotong.Api.IRepository
 {
     public interface IVideoCenterRepository:IBaseRepository<VideoLearnCenter>
     {
-        List<VideoLearnCenter> GetVideoLearnCenterList(int startPage,int endPage);
+        List<VideoLearnCenter> GetVideoLearnCenterList(int startPage, int endPage, int cid, int userid);
         Task<int> AddVideo(VideoLearnCenter videoLearnCenter);
 
         Task<int> UpdateVideo(VideoLearnCenter videoLearnCenter);

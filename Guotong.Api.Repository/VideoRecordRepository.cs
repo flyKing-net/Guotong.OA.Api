@@ -17,5 +17,17 @@ namespace Guotong.Api.Repository
                           values(@VideoId,@Cid,@UserId,@WatchLongTime,@WatchState,@VideoImage,@StartWatchTime,@FinishWatchTime)";
             return await Insert(sql, videoLearnRecord);
         }
+
+        public VideoLearnRecord GetRecord(int videoId, int cid, int userid)
+        {
+            string sql = "select top 1 Id,WatchState,VideoImage from VideoLearnRecord where VideoId=@videoId and Cid=@cid and UserId=@userid order by Id desc";
+            return Detail(sql,new {videoId=videoId,cid=cid,userid=userid });
+        }
+
+        public async Task<int> UpdateRecord(VideoLearnRecord videoLearnRecord)
+        {
+            string sql = @"update VideoLearnRecord set WatchLongTime=@WatchLongTime,WatchState=@WatchState,FinishWatchTime=@FinishWatchTime,VideoImage=@VideoImage where Id=@Id";
+            return await Update(sql,videoLearnRecord);
+        }
     }
 }

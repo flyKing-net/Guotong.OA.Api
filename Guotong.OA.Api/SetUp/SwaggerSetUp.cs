@@ -16,9 +16,9 @@ namespace Guotong.Api.SetUp
             if (services==null) throw new ArgumentNullException(nameof(services));
             var apiName = "api接口文档";
             services.AddSwaggerGen(c => {
-                c.SwaggerDoc("v1.0", new Microsoft.OpenApi.Models.OpenApiInfo
+                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
                 {
-                    Version = "v1.0", //版本号
+                    Version = "v1", //版本号
                     Title = $"{apiName}", //定义全局，方便修改
                     Description = "审计事业部api接口文档", //描述
                     Contact = new Microsoft.OpenApi.Models.OpenApiContact { Name = "成都账联网络科技有限公司" }, //主体
