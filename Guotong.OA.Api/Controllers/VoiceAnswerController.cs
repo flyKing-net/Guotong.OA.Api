@@ -261,7 +261,7 @@ namespace Guotong.Api.Controllers
         /// <summary>
         /// 添加答题语音信息
         /// </summary>
-        /// <param name="answerId">语音编号</param>
+        /// <param name="answerId">用户答题编号</param>
         /// <param name="answerContent">语音内容</param>
         /// <param name="subjectInfoId">题干编号</param>
         /// <param name="answerTime">回答时间</param>
@@ -269,7 +269,7 @@ namespace Guotong.Api.Controllers
         /// <returns></returns>
         [HttpPost]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> AddAnswerInfo(int answerId,string answerContent,int subjectInfoId,int answerTime,string answerText) {
+        public async Task<IActionResult> AddAnswerInfo(int answerId,[FromBody]string answerContent,int subjectInfoId,int answerTime,string answerText) {
             bool addState = await _answerInfoService.AddAnswerInfo(new VoiceAnswerInfo
             {
                 AnswerId = answerId,

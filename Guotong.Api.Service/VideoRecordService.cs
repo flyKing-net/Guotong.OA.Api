@@ -25,7 +25,7 @@ namespace Guotong.Api.Service
 
         public async Task<bool> AddRecord(VideoLearnRecord videoLearnRecord,string imageIO)
         {
-            if(!UploadImage.UploadFile(videoLearnRecord.VideoImage,imageIO, "/VideoRecordImage")) return false;
+            if(!UploadHelper.UploadFile(videoLearnRecord.VideoImage,imageIO)) return false;
             bool addState = true;
             VideoRecordViewModel viewModels = GetRecord(videoLearnRecord.VideoId, videoLearnRecord.Cid, videoLearnRecord.UserId); //查询当前用户观看记录信息
             if (viewModels != null) //存在信息

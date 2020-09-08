@@ -65,7 +65,7 @@ namespace Guotong.Api.Controllers
         /// <returns></returns>
         [HttpPost]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> AddVideoRecord(int videoId,int cid,int userId,int watchLongTime,int watchState,string videoImage,string imageIO) {
+        public async Task<IActionResult> AddVideoRecord(int videoId,int cid,int userId,int watchLongTime,int watchState,string videoImage,[FromBody]string imageIO) {
             bool addState = await _videoRecordService.AddRecord(new VideoLearnRecord { 
             VideoId=videoId,
             Cid=cid,

@@ -3,30 +3,26 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Guotong.Api.Common.Helper
 {
-    public class UploadImage
+    public class UploadHelper
     {
-        public static bool UploadFile(string fileName, string imageIO, string fileUrl)
+        public static bool UploadFile(string fileName, string imageIO)
         {
-            string message = "";
+
             byte[] pFileContent = Convert.FromBase64String(imageIO);
-            if (pFileContent.Length <= 0)
-            {
-                return false;
-            }
-            //string mFilePath =Server.MapPath(fileUrl);
-            string mFilePath = Path.GetDirectoryName(fileUrl);
+            if (pFileContent.Length <= 0)return false;
+            string mFilePath = "D://wwwroot//Api//wwwroot//upload//videoRecord//";
             if (!Directory.Exists(mFilePath))
             {
                 Directory.CreateDirectory(mFilePath);
             }
-            message = mFilePath;
             try
             {
                 string mFileName = Path.Combine(mFilePath, fileName);
-                using (FileStream mStream = File.Open(mFileName, FileMode.Create, FileAccess.ReadWrite))
+                using (FileStream mStream = new FileStream(mFileName,FileMode.CreateNew))
                 {
                     mStream.Write(pFileContent, 0, pFileContent.Length);
                     mStream.Flush();
