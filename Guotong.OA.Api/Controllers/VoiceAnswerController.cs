@@ -102,8 +102,9 @@ namespace Guotong.Api.Controllers
         [HttpPatch]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateVoiceAnswerTitles(int id, string answerTitle, string rulesOfAnswer, int publishCid, int publisherId) {
-            bool updateState = await _answerTitleService.UpdateAnswerTitle(new VoiceAnswerTitle {
-                Id=id,
+            bool updateState = await _answerTitleService.UpdateAnswerTitle(new VoiceAnswerTitle
+            {
+                Id = id,
                 AnswerTitle = answerTitle,
                 RulesOfAnswer = rulesOfAnswer,
                 PublishCid = publishCid,
@@ -186,7 +187,7 @@ namespace Guotong.Api.Controllers
 
         /// <summary>
         /// 修改语音答题题干信息
-        /// </summary>
+        /// </summary> 
         /// <param name="id">编号</param>
         /// <param name="answerTitleId">语音答题标题编号</param>
         /// <param name="subjectId">题干编号</param>
@@ -199,7 +200,8 @@ namespace Guotong.Api.Controllers
         [HttpPatch]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateVoiceSubject(int id,int answerTitleId, int subjectId, string subjectContent, int timeLimit, int subjectType, int subjectTimeLength, int minTimeLimit) {
-            bool updateState =await _subjectInfoService.UpdateVoiceSubject(new VoiceSubjectInfo {
+            bool updateState =await _subjectInfoService.UpdateVoiceSubject(new VoiceSubjectInfo 
+            {
                 Id=id,
                 AnswerTitleId = answerTitleId,
                 SubjectId = subjectId,
